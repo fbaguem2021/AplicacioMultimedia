@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AplicacioMultimedia">
         <activity
+            android:name=".ImageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VideoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SoundActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TextActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
