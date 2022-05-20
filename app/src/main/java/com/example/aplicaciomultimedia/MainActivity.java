@@ -1,11 +1,18 @@
 package com.example.aplicaciomultimedia;
 
+import static com.example.aplicaciomultimedia.classes.MyPermission.*;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.example.aplicaciomultimedia.classes.MyPermission;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        checkPermissions((Activity) this);
+
         initComponents();
         initEvents();
     }
@@ -55,5 +65,29 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions,
+                                           int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        boolean checked = true;
+        int i = 0;
+        while (i < permissions.length && checked) {
+            if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                checked = false;
+            }
+
+            i++;
+        }
+
+        if (checked) {
+            MyPermission.start(this);
+        } else {
+            Toast.makeText(this, "Permissions not Granted", Toast.LENGTH_SHORT).show();
+        }
     }
 }
