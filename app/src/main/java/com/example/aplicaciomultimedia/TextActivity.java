@@ -1,6 +1,6 @@
 package com.example.aplicaciomultimedia;
 
-import static com.example.aplicaciomultimedia.classes.MyPermission.checkPermissions;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +14,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.aplicaciomultimedia.classes.MyPermission;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class TextActivity extends AppCompatActivity {
 
@@ -54,5 +60,31 @@ public class TextActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    private void leerFichero(String path) {
+        try {
+            String file = "";
+            String s;
+            FileReader fr = new FileReader(path);
+            BufferedReader br = new BufferedReader(fr);
+
+            while ( (s = br.readLine()) != null ) {
+                file += s;
+            }
+            fr.close();
+
+            etText.setText(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void saveFile(String path, String s) {
+        try {
+            FileWriter fw = new FileWriter(path);
+            fw.write(s);
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
