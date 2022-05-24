@@ -8,10 +8,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,6 +24,7 @@ import com.example.aplicaciomultimedia.classes.MyPermission;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static int RECORD_REQUEST = 0;
     public static boolean manage_permission_granted = true;
     ImageView ivText;
     ImageView ivImage;
@@ -67,10 +71,13 @@ public class MainActivity extends AppCompatActivity {
         ivSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (manage_permission_granted) {
-                    Intent intent = new Intent(MainActivity.this, SoundActivity.class);
-                    startActivity(intent);
-                }
+//                if (manage_permission_granted) {
+//                    Intent intent = new Intent(MainActivity.this, AudioListActivity.class);
+//                    startActivity(intent);
+//                }
+
+                Intent intent = new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
+                startActivityForResult(intent, 1);
             }
         });
         ivVideo.setOnClickListener(new View.OnClickListener() {
