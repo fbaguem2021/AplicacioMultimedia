@@ -6,44 +6,64 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/ivText"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:src="@drawable/text"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clApps"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/ivImage"
-        app:layout_constraintBottom_toTopOf="@id/ivSound"/>
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <ImageView
-        android:id="@+id/ivImage"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:src="@drawable/image"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ivText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/ivVideo"/>
+        <ImageView
+            android:id="@+id/ivText"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/text"
+            android:padding="5dp"
+            android:background="@drawable/border_icons"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ivImage"
+            app:layout_constraintBottom_toTopOf="@id/ivSound"/>
 
-    <ImageView
-        android:id="@+id/ivSound"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:src="@drawable/sound"
-        app:layout_constraintTop_toBottomOf="@id/ivText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/ivVideo"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        <ImageView
+            android:id="@+id/ivImage"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/image"
+            android:padding="5dp"
+            android:background="@drawable/border_icons"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/ivVideo"/>
 
-    <ImageView
-        android:id="@+id/ivVideo"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:src="@drawable/video"
-        app:layout_constraintTop_toBottomOf="@id/ivImage"
-        app:layout_constraintStart_toEndOf="@id/ivSound"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <ImageView
+            android:id="@+id/ivSound"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/sound"
+            android:padding="5dp"
+            android:background="@drawable/border_icons"
+            app:layout_constraintTop_toBottomOf="@id/ivText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ivVideo"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivVideo"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/video"
+            android:padding="5dp"
+            android:background="@drawable/border_icons"
+            app:layout_constraintTop_toBottomOf="@id/ivImage"
+            app:layout_constraintStart_toEndOf="@id/ivSound"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
