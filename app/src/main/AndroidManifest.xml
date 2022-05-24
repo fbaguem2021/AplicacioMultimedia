@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AplicacioMultimedia">
         <activity
+            android:name=".AudioListActivity"
+            android:exported="false" />
+        <activity
             android:name=".FileListActivity"
             android:exported="false" />
         <activity
@@ -41,6 +44,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
