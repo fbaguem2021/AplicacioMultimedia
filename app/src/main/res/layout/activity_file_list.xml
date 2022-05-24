@@ -4,11 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".FileListActivity">
+
+    <Button
+        android:id="@+id/btnNuevoFichero"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nuevo Fichero"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/teal_700"/>
 
     <ListView
         android:id="@+id/lstFiles"
         android:layout_margin="50dp"
+        android:background="@drawable/border_white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

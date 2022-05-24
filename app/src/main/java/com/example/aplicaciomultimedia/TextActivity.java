@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.aplicaciomultimedia.classes.MyPermission;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,8 +24,10 @@ import java.util.ArrayList;
 
 public class TextActivity extends AppCompatActivity {
 
+    public static final String DOCUMENTS = "/storage/emulated/0/Documents";
+
     EditText etText;
-    Button btnBuscarArchivo;
+    EditText etFileName;
     Button btnGuardar;
     Button btnCancelar;
     @Override
@@ -32,26 +35,49 @@ public class TextActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text);
 
-        initComponents();
-        initEvents();
+        Intent intent = getIntent();
+        boolean createmode = intent.getBooleanExtra(FileListActivity.CREATE_MODE, true);
+        String fileName = "";
+        if (!createmode) {
+            fileName = intent.getStringExtra(FileListActivity.FILE_NAME);
+        }
+
+        initComponents(createmode, fileName);
+        initEvents(createmode, fileName);
     }
-    private void initComponents() {
+    private void initComponents(boolean createmode, String fileName) {
         etText = findViewById(R.id.etText);
-        btnBuscarArchivo = findViewById(R.id.btnBuscarArchivo);
+        if (!createmode) {
+            leerFichero(DOCUMENTS+"/"+fileName);
+        }
+        etFileName = findViewById(R.id.etFileName);
+        etFileName.setText(fileName);
         btnGuardar = findViewById(R.id.btnGuardar);
         btnCancelar = findViewById(R.id.btnCancelar);
     }
-    private void initEvents() {
-        btnBuscarArchivo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+    private void initEvents(boolean createmode, String fileName) {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String text = etText.getText().toString();
+                if (!etFileName.getText().toString().equals("")) {
+                    if (createmode) {
+                        saveFile(DOCUMENTS+"/"+etFileName.getText().toString(), text);
+                    } else {
+                        if (fileName.equals(etFileName.getText().toString())) {
+                            saveFile(DOCUMENTS+"/"+fileName, text);
+                            Toast.makeText(TextActivity.this, "Archivo guardado correctamente", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            new File(DOCUMENTS+"/"+fileName).delete();
+                            saveFile(DOCUMENTS+"/"+etFileName.getText().toString(), text);
+                            Toast.makeText(TextActivity.this, "Archivo guardado correctamente", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    }
+                } else {
+                    Toast.makeText(TextActivity.this, "Primero has de intrtoducir un nombre", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         btnCancelar.setOnClickListener(new View.OnClickListener() {
