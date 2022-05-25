@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -22,10 +23,15 @@ import android.widget.Toast;
 
 import com.example.aplicaciomultimedia.classes.MyPermission;
 
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
 
     public static int RECORD_REQUEST = 0;
     public static boolean manage_permission_granted = true;
+    public static final int SOUND_CODE = 1;
+    public static final int VIDEO_CODE = 2;
+    public static final int IMAGE_CODE = 3;
     ImageView ivText;
     ImageView ivImage;
     ImageView ivSound;
@@ -75,19 +81,19 @@ public class MainActivity extends AppCompatActivity {
 //                    Intent intent = new Intent(MainActivity.this, AudioListActivity.class);
 //                    startActivity(intent);
 //                }
-
-                Intent intent = new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
-                startActivityForResult(intent, 1);
             }
         });
         ivVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (manage_permission_granted) {
-                    Intent intent = new Intent(MainActivity.this, VideoActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(MainActivity.this, "Primero deves conceder el permiso para acceder a los archivos", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(MainActivity.this, VideoActivity.class);
+//                startActivity(intent);
+                try {
+                    Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                    startActivityForResult(intent, VIDEO_CODE);
+                } catch (ActivityNotFoundException ex) {
+                    Toast.makeText(v.getContext(), "Este dispositivo no permite la captura de video", Toast.LENGTH_SHORT).show();
+                    ex.printStackTrace();
                 }
             }
         });

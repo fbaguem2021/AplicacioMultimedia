@@ -10,7 +10,7 @@
         android:id="@+id/etText"
         android:layout_width="350dp"
         android:layout_height="400dp"
-        android:background="@drawable/border_white"
+        style="@style/element_border"
         android:maxLines="1"
         android:lines="1"
         android:gravity="top"
@@ -31,6 +31,7 @@
         app:layout_constraintEnd_toStartOf="@id/etFileName"
         app:layout_constraintBottom_toTopOf="@id/layoutButtons"/>
     <EditText
+        style="@style/element_border"
         android:id="@+id/etFileName"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
