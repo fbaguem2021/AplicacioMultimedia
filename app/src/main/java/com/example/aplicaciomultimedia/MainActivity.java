@@ -68,9 +68,16 @@ public class MainActivity extends AppCompatActivity {
         ivImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (manage_permission_granted) {
-                    Intent intent = new Intent(MainActivity.this, ImageActivity.class);
-                    startActivity(intent);
+//                if (manage_permission_granted) {
+//                    Intent intent = new Intent(MainActivity.this, ImageActivity.class);
+//                    startActivity(intent);
+//                }
+                try {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, IMAGE_CODE);
+                } catch (ActivityNotFoundException ex) {
+                    Toast.makeText(v.getContext(), "Este dispositivo no permite la captura de imagenes", Toast.LENGTH_SHORT).show();
+                    ex.printStackTrace();
                 }
             }
         });
