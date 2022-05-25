@@ -37,7 +37,7 @@ public class MyPermission {
         }
     }
     public static void requestPermissions(MainActivity activity) {
-        if (Build.VERSION.SDK_INT >= 30 ) {
+        if (Build.VERSION.SDK_INT >23 ) {
             if (checkPermissions(activity, PERMISSIONS)) {
                 ActivityCompat.requestPermissions(activity, PERMISSIONS, REQ_CODE_GENERAL);
                 if (ContextCompat.checkSelfPermission(activity, Manifest.permission.MANAGE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
