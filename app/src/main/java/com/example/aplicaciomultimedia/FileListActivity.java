@@ -33,7 +33,7 @@ public class FileListActivity extends AppCompatActivity {
         lstFiles = findViewById(R.id.lstFiles);
         btnNuevoFichero = findViewById(R.id.btnNuevoFichero);
         final ArrayList<String> files = getFiles(DOCUMENTS);
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, files);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, files);
         lstFiles.setAdapter(adapter);
 
         lstFiles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -56,14 +56,24 @@ public class FileListActivity extends AppCompatActivity {
     }
     public ArrayList<String> getFiles(@NonNull String path) {
         ArrayList<String> files = new ArrayList<>();
-        if (new File(DOCUMENTS+"/file.txt").exists()) {
+        if (new File(DOCUMENTS+"/").exists()) {
             String s = "gi8b";
         }
-        for (File f : new File(path+"/").listFiles()) {
-            if (f.isFile()) {
-                files.add(f.getName());
+        int i = 0;
+        File[] fid = new File(path+"/").listFiles();
+        if (  fid != null && fid.length != 0) {
+            while (i < fid.length) {
+                if (fid[i].isFile()) {
+                    files.add(fid[i].getName());
+                }
+                i++;
             }
         }
+//        for (File f : new File(path+"/").listFiles()) {
+//            if (f.isFile()) {
+//                files.add(f.getName());
+//            }
+//        }
         return files;
     }
     @Override
