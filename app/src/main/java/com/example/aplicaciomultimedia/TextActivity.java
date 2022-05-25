@@ -63,6 +63,7 @@ public class TextActivity extends AppCompatActivity {
                 if (!etFileName.getText().toString().equals("")) {
                     if (createmode) {
                         saveFile(DOCUMENTS+"/"+etFileName.getText().toString(), text);
+                        finish();
                     } else {
                         if (fileName.equals(etFileName.getText().toString())) {
                             saveFile(DOCUMENTS+"/"+fileName, text);
