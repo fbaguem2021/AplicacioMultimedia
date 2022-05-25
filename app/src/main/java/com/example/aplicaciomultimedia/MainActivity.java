@@ -81,6 +81,13 @@ public class MainActivity extends AppCompatActivity {
 //                    Intent intent = new Intent(MainActivity.this, AudioListActivity.class);
 //                    startActivity(intent);
 //                }
+                try {
+                    Intent intent = new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
+                    startActivityForResult(intent, SOUND_CODE);
+                } catch (ActivityNotFoundException ex) {
+                    Toast.makeText(v.getContext(), "Este dispositivo no permite la gravación de audio", Toast.LENGTH_SHORT);
+                    ex.printStackTrace();
+                }
             }
         });
         ivVideo.setOnClickListener(new View.OnClickListener() {
