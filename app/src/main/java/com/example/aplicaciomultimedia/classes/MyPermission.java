@@ -13,6 +13,7 @@ import com.example.aplicaciomultimedia.MainActivity;
 
 public class MyPermission {
     public static final String[] PERMISSIONS = {
+            Manifest.permission.INTERNET,
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -33,8 +34,9 @@ public class MyPermission {
         }
     }
     public static void requestPermissions(MainActivity activity) {
-        if (Build.VERSION.SDK_INT >23 ) {
-            if (checkPermissions(activity, PERMISSIONS)) {
+        Toast.makeText(activity, ""+Build.VERSION.SDK_INT, Toast.LENGTH_LONG).show();
+        if (Build.VERSION.SDK_INT > 23 ) {
+            if (!checkPermissions(activity, PERMISSIONS)) {
                 ActivityCompat.requestPermissions(activity, PERMISSIONS, REQ_CODE_GENERAL);
                 if (ContextCompat.checkSelfPermission(activity, Manifest.permission.MANAGE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     activity.checkAllFilesPermission();
