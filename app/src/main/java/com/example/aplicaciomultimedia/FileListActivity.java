@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -69,11 +68,6 @@ public class FileListActivity extends AppCompatActivity {
                 i++;
             }
         }
-//        for (File f : new File(path+"/").listFiles()) {
-//            if (f.isFile()) {
-//                files.add(f.getName());
-//            }
-//        }
         return files;
     }
     @Override

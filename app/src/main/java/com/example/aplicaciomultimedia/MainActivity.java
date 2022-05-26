@@ -5,29 +5,22 @@ import static com.example.aplicaciomultimedia.classes.MyPermission.*;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.aplicaciomultimedia.classes.MyPermission;
 
-import java.io.IOException;
-
 public class MainActivity extends AppCompatActivity {
 
-    public static int RECORD_REQUEST = 0;
     public static boolean manage_permission_granted = true;
     public static final int SOUND_CODE = 1;
     public static final int VIDEO_CODE = 2;
@@ -36,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     ImageView ivImage;
     ImageView ivSound;
     ImageView ivVideo;
-    Button btnPermissions;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,10 +60,6 @@ public class MainActivity extends AppCompatActivity {
         ivImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (manage_permission_granted) {
-//                    Intent intent = new Intent(MainActivity.this, ImageActivity.class);
-//                    startActivity(intent);
-//                }
                 try {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(intent, IMAGE_CODE);
@@ -84,15 +72,11 @@ public class MainActivity extends AppCompatActivity {
         ivSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (manage_permission_granted) {
-//                    Intent intent = new Intent(MainActivity.this, AudioListActivity.class);
-//                    startActivity(intent);
-//                }
                 try {
                     Intent intent = new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
                     startActivityForResult(intent, SOUND_CODE);
                 } catch (ActivityNotFoundException ex) {
-                    Toast.makeText(v.getContext(), "Este dispositivo no permite la gravación de audio", Toast.LENGTH_SHORT);
+                    Toast.makeText(v.getContext(), "Este dispositivo no permite la gravación de audio", Toast.LENGTH_SHORT).show();
                     ex.printStackTrace();
                 }
             }
@@ -100,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
         ivVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, VideoActivity.class);
-//                startActivity(intent);
                 try {
                     Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
                     startActivityForResult(intent, VIDEO_CODE);
@@ -111,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     public void checkAllFilesPermission() {
@@ -149,21 +130,6 @@ public class MainActivity extends AppCompatActivity {
         {
             checkAllFilesPermission();
         }
-
-//        while (i < permissions.length && checked) {
-//            if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-//                checked = false;
-//                p+=permissions[i]+",\n";
-//            }
-//
-//            i++;
-//        }
-//
-//        if (checked) {
-//            MyPermission.start(this);
-//        } else {
-//            Toast.makeText(this, "Permissions:\n"+p+" not Granted", Toast.LENGTH_SHORT).show();
-//        }
     }
 
     @Override

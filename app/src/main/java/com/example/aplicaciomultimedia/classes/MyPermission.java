@@ -2,11 +2,8 @@ package com.example.aplicaciomultimedia.classes;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.os.Environment;
-import android.provider.Settings;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
@@ -22,7 +19,6 @@ public class MyPermission {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA,
             Manifest.permission.RECORD_AUDIO
-           //,Manifest.permission.MANAGE_EXTERNAL_STORAGE
     };
     public static final int REQ_CODE_GENERAL = 1;
     public static final int REQ_CODE_MANAGE = 2;
@@ -64,9 +60,6 @@ public class MyPermission {
         }
         return checked;
     }
-//    private static void requestPermissions(Activity activity, String[] permissions) {
-//        ActivityCompat.requestPermissions(activity, permissions, REQ_CODE_GENERAL);
-//    }
     public static void start(Activity activity) {
         Toast.makeText(activity, "Permissions Granted", Toast.LENGTH_SHORT).show();
     }
