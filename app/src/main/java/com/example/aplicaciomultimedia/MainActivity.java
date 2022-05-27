@@ -1,15 +1,9 @@
 package com.example.aplicaciomultimedia;
 
-import static com.example.aplicaciomultimedia.classes.MyPermission.*;
+import static com.example.aplicaciomultimedia.classes.MyPermission.REQ_CODE_MANAGE;
+import static com.example.aplicaciomultimedia.classes.MyPermission.start;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
-import android.Manifest;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -18,10 +12,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.aplicaciomultimedia.classes.MyAddress;
 import com.example.aplicaciomultimedia.classes.MyPermission;
