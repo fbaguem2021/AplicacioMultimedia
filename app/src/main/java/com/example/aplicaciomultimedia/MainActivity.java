@@ -2,33 +2,45 @@ package com.example.aplicaciomultimedia;
 
 import static com.example.aplicaciomultimedia.classes.MyPermission.*;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.aplicaciomultimedia.classes.MyAddress;
 import com.example.aplicaciomultimedia.classes.MyPermission;
 
 public class MainActivity extends AppCompatActivity {
 
+    MyAddress myAddress;
+    public static final String GOOGLE_MAPS_PACKAGE = "com.google.android.apps.maps";
     public static boolean manage_permission_granted = true;
     public static final int SOUND_CODE = 1;
     public static final int VIDEO_CODE = 2;
     public static final int IMAGE_CODE = 3;
+    ImageView ivInternet;
+    ImageView ivMaps;
     ImageView ivText;
     ImageView ivImage;
     ImageView ivSound;
     ImageView ivVideo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +53,33 @@ public class MainActivity extends AppCompatActivity {
         initEvents();
     }
     private void initComponents(){
+        ivInternet = findViewById(R.id.ivInternet);
+        ivMaps  = findViewById(R.id.ivMaps);
         ivText  = findViewById(R.id.ivText);
         ivImage = findViewById(R.id.ivImage);
         ivSound = findViewById(R.id.ivSound);
         ivVideo = findViewById(R.id.ivVideo);
-
     }
     private void initEvents() {
+        ivInternet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://politecnics.barcelona/";
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
+        });
+        ivMaps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myAddress = new MyAddress(MainActivity.this).generateLocation().generateUri();
+                Intent intent = new Intent(Intent.ACTION_VIEW, myAddress.getUri());
+                intent.setPackage(GOOGLE_MAPS_PACKAGE);
+                Toast.makeText(MainActivity.this, ""+(myAddress.location == null), Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        });
         ivText .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,8 +149,13 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         boolean checked = true;
-        int i = 0;
-        String p = "";
+
+        for (int i = 0; i < grantResults.length; i++) {
+            if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                Toast.makeText(MainActivity.this, ""+i, Toast.LENGTH_SHORT).show();
+            }
+        }
+
         if (requestCode == REQ_CODE_MANAGE &&
             grantResults.length > 0 &&
             grantResults[0] == PackageManager.PERMISSION_GRANTED &&
@@ -126,7 +163,8 @@ public class MainActivity extends AppCompatActivity {
             grantResults[2] == PackageManager.PERMISSION_GRANTED &&
             grantResults[3] == PackageManager.PERMISSION_GRANTED &&
             grantResults[4] == PackageManager.PERMISSION_GRANTED &&
-            grantResults[5] == PackageManager.PERMISSION_GRANTED)
+            grantResults[5] == PackageManager.PERMISSION_GRANTED &&
+            grantResults[6] == PackageManager.PERMISSION_GRANTED)
         {
             checkAllFilesPermission();
         }
