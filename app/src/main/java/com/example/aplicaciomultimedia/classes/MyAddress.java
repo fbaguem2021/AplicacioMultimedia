@@ -1,15 +1,9 @@
 package com.example.aplicaciomultimedia.classes;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.aplicaciomultimedia.MainActivity;
@@ -21,18 +15,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.Context;
-import android.widget.TextView;
-
-import android.util.Log;
-
-import androidx.core.app.ActivityCompat;
-
 public class MyAddress {
-    protected LocationManager locationManager;
-    protected LocationListener locationListener;
     private MainActivity activity;
     public Location location;
     private String address;

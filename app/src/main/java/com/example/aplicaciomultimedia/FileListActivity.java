@@ -55,9 +55,6 @@ public class FileListActivity extends AppCompatActivity {
     }
     public ArrayList<String> getFiles(@NonNull String path) {
         ArrayList<String> files = new ArrayList<>();
-        if (new File(DOCUMENTS+"/").exists()) {
-            String s = "gi8b";
-        }
         int i = 0;
         File[] fid = new File(path+"/").listFiles();
         if (  fid != null && fid.length != 0) {
