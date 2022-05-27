@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     public static final int SOUND_CODE = 1;
     public static final int VIDEO_CODE = 2;
     public static final int IMAGE_CODE = 3;
-    boolean locationEnabled = false;
     ImageView ivInternet;
     ImageView ivMaps;
     ImageView ivText;
@@ -65,17 +64,20 @@ public class MainActivity extends AppCompatActivity {
         ivInternet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String url = "https://politecnics.barcelona/";
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
             }
         });
         ivMaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyAddress address = new MyAddress(MainActivity.this).generateLocation().generateUri();
-                Intent intent = new Intent(Intent.ACTION_VIEW, address.getUri());
+                myAddress = new MyAddress(MainActivity.this).generateLocation().generateUri();
+                Intent intent = new Intent(Intent.ACTION_VIEW, myAddress.getUri());
                 intent.setPackage(GOOGLE_MAPS_PACKAGE);
-                Toast.makeText(MainActivity.this, ""+(address.location == null), Toast.LENGTH_SHORT).show();
-                //startActivity(intent);
+                Toast.makeText(MainActivity.this, ""+(myAddress.location == null), Toast.LENGTH_SHORT).show();
+                startActivity(intent);
             }
         });
         ivText .setOnClickListener(new View.OnClickListener() {
